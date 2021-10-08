@@ -79,3 +79,13 @@ div.divider {
 *:not(body) {
   margin-bottom: 10px;
 }
+
+img {
+  width: 300px;
+}
+
+a {
+  color: black;
+  font-weight: bold;
+  font-size: 16px;
+}
