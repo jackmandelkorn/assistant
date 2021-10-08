@@ -226,3 +226,18 @@ const compute1_5 = () => {
   const bin = document.getElementById("number-1-5").value.trim().replace(/\s/g, '')
   document.getElementById("result-1-5").innerHTML = parseInt(bin, 2).toString()
 }
+
+const computeMisc = () => {
+  document.getElementById("result-misc").innerHTML = "Loading..."
+  runC(
+    document.getElementById("code-misc").value.trim(),
+    (r) => {
+      try {
+        document.getElementById("result-misc").innerHTML = r.trim()
+      }
+      catch (e) {
+        document.getElementById("result-misc").innerHTML = "Error."
+      }
+    }
+  )
+}
