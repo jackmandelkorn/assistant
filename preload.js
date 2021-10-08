@@ -191,3 +191,38 @@ const compute2_2 = () => {
   let t = ("Normal Notation: " + getDecNormal(dec) + "<br>Sign Bit: " + sign + "<br>Exponent: " + getDecExponent(dec) + "<br>Fraction: " + getDecFraction(dec))
   document.getElementById("result-2-2").innerHTML = t
 }
+
+const compute1_1 = () => {
+  const dec = document.getElementById("number-1-1").value.trim().replace(/\s/g, '')
+  document.getElementById("result-1-1").innerHTML = Math.abs(dec).toString(2)
+}
+
+const compute1_2 = () => {
+  const dec = parseInt(document.getElementById("number-1-2").value.trim().replace(/\s/g, ''))
+  if (dec < 0) {
+    document.getElementById("result-1-2").innerHTML = ("1" + Math.abs(dec + 128).toString(2).padStart(7, "0"))
+  }
+  else {
+    document.getElementById("result-1-2").innerHTML = dec.toString(2).padStart(8, "0")
+  }
+}
+
+const compute1_3 = () => {
+  const bin = document.getElementById("number-1-3").value.trim().replace(/\s/g, '')
+  document.getElementById("result-1-3").innerHTML = ("0x" + parseInt(bin,2).toString(16).toUpperCase())
+}
+
+const compute1_4 = () => {
+  const bin = document.getElementById("number-1-4").value.trim().replace(/\s/g, '')
+  if (bin.charAt(0) === "0") {
+    document.getElementById("result-1-4").innerHTML = parseInt(bin, 2).toString()
+  }
+  else {
+    document.getElementById("result-1-4").innerHTML = (parseInt(bin.substring(1), 2) - 128).toString();
+  }
+}
+
+const compute1_5 = () => {
+  const bin = document.getElementById("number-1-5").value.trim().replace(/\s/g, '')
+  document.getElementById("result-1-5").innerHTML = parseInt(bin, 2).toString()
+}

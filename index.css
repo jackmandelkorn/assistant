@@ -11,7 +11,8 @@ body {
   align-content: center;
   flex-direction: column;
   font-family: 'Open Sans', sans-serif;
-  padding: 20px 0px;
+  padding: 32px 0px;
+  text-align: center;
 }
 
 textarea, input {
