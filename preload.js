@@ -24,18 +24,58 @@ const bitwiseOP = (variables, compute, callback) => {
   runC(s, callback)
 }
 
-const compute1 = () => {
-  document.getElementById("result-1").innerHTML = "Loading..."
+const compute6 = () => {
+  document.getElementById("result-6").innerHTML = "Loading..."
   bitwiseOP(
-    document.getElementById("variables-1").value.trim(),
-    document.getElementById("compute-1").value.trim(),
+    document.getElementById("variables-6").value.trim(),
+    document.getElementById("compute-6").value.trim(),
     (r) => {
       try {
-        document.getElementById("result-1").innerHTML = "0x" + r.trim().toUpperCase().padStart(8, "0")
+        document.getElementById("result-6").innerHTML = "0x" + r.trim().toUpperCase().padStart(8, "0")
       }
       catch (e) {
-        document.getElementById("result-1").innerHTML = "Error."
+        document.getElementById("result-6").innerHTML = "Error."
       }
     }
   )
+}
+
+const getSign = (bin) => {
+  if (bin.charAt(0) === "0") {
+    return "+"
+  }
+  return "-"
+}
+
+const getExponent = (bin) => {
+  let s = bin.substr(1,5)
+  return (parseInt(s, 2) - 15)
+}
+
+const getFraction = (bin) => {
+  let s = bin.substr(6,6)
+  let n = 0
+  for (let i = 0; i < s.length; i++) {
+    if (s.charAt(i) === "1") {
+      n += (1 / Math.pow(2, i + 1))
+    }
+  }
+  return n
+}
+
+const getDecimal = (bin) => {
+  let sign = getSign(bin)
+  let exponent = getExponent(bin)
+  let fraction = getFraction(bin)
+  let add = ""
+  if (sign === "-") {
+    add = sign
+  }
+  return (add + ((1 + fraction) * Math.pow(2, exponent)).toString())
+}
+
+const compute2_1 = () => {
+  let bin = document.getElementById("number-2-1").value.trim().replace(/\s/g, '')
+  let t = ("Sign: " + getSign(bin) + "<br>Exponent: " + getExponent(bin) + "<br>Fraction: " + getFraction(bin) + "<br>Decimal: " + getDecimal(bin))
+  document.getElementById("result-2-1").innerHTML = t
 }
