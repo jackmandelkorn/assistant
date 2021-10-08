@@ -64,6 +64,7 @@ button {
   background: black;
   border-radius: 1000px;
   cursor: pointer;
+  font-size: 14px;
 }
 
 div.divider {
