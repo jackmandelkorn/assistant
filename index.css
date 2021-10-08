@@ -49,6 +49,9 @@ p {
   font-family: monospace;
   font-weight: bold;
   font-size: 20px;
+  max-width: 300px;
+  box-sizing: border-box;
+  text-align: center;
 }
 
 button {
