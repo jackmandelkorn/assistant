@@ -1,4 +1,5 @@
 const runC = (code, callback) => {
+  code = code.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"')
   let s = JSON.stringify(code).substring(1)
   s = s.substring(0, s.length - 1)
   fetch("https://api.labstack.com/run", {
