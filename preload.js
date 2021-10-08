@@ -79,3 +79,115 @@ const compute2_1 = () => {
   let t = ("Sign: " + getSign(bin) + "<br>Exponent: " + getExponent(bin) + "<br>Fraction: " + getFraction(bin) + "<br>Decimal: " + getDecimal(bin))
   document.getElementById("result-2-1").innerHTML = t
 }
+
+const getDecSign = (dec) => {
+  if (dec.toString().charAt(0) === "-") {
+    return "-"
+  }
+  return "+"
+}
+
+const getDecExN = (dec) => {
+  let n = Math.abs(dec)
+  let exponent = 0
+  if (n < 1) {
+    while (n < 1) {
+      n *= 2
+      exponent--
+    }
+    return [exponent, n]
+  }
+  else {
+    while (n > 2) {
+      n /= 2
+      exponent++
+    }
+    return [exponent, n]
+  }
+}
+
+const getDecNormal = (dec) => {
+  const max = 32
+  let [exponent, n] = getDecExN(dec)
+  let dots = ""
+  if (n.toString(2).substring(0,max).length < n.toString(2).length) {
+    dots = "..."
+  }
+  if (needsNormalization(dec)) {
+    exponent++
+  }
+  return (getDecSign(dec) + n.toString(2).substring(0,max) + dots + " &times; 2^" + exponent.toString())
+}
+
+const getDecExponent = (dec) => {
+  let [exponent, n] = getDecExN(dec)
+  if (needsNormalization(dec)) {
+    exponent++
+  }
+  return (exponent + 15).toString(2).padStart(5, "0")
+}
+
+const needsNormalization = (dec) => {
+  const all_ones = "111111"
+  let [exponent, n] = getDecExN(dec)
+  let bits = n.toString(2).substr(2,6)
+  let add = n.toString(2).substring(8)
+  if (add.charAt(0) === "0") {
+    return false
+  }
+  if (!add.substring(1).includes("1")) {
+    if (bits.charAt(5) === "0") {
+      return false
+    }
+    else {
+      if (bits === all_ones) {
+        return true
+      }
+      return false
+    }
+  }
+  else {
+    if (bits === all_ones) {
+      return true
+    }
+    return false
+  }
+}
+
+const getDecFraction = (dec) => {
+  const all_ones = "111111"
+  const all_zeroes = "000000"
+  let [exponent, n] = getDecExN(dec)
+  let bits = n.toString(2).substr(2,6)
+  let add = n.toString(2).substring(8)
+  if (add.charAt(0) === "0") {
+    return bits
+  }
+  if (!add.substring(1).includes("1")) {
+    if (bits.charAt(5) === "0") {
+      return bits
+    }
+    else {
+      if (bits === all_ones) {
+        return all_zeroes
+      }
+      return (parseInt(bits,2) + 1).toString(2).padStart(6, "0")
+    }
+  }
+  else {
+    if (bits === all_ones) {
+      return all_zeroes
+    }
+    return (parseInt(bits,2) + 1).toString(2).padStart(6, "0")
+  }
+}
+
+const compute2_2 = () => {
+  let dec = document.getElementById("number-2-2").value.trim().replace(/\s/g, '')
+  let sign = "0"
+  if (getDecSign(dec) === "-") {
+    sign = "1"
+  }
+  let t = ("Normal Notation: " + getDecNormal(dec) + "<br>Sign Bit: " + sign + "<br>Exponent: " + getDecExponent(dec) + "<br>Fraction: " + getDecFraction(dec))
+  document.getElementById("result-2-2").innerHTML = t
+}
