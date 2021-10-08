@@ -52,6 +52,7 @@ p {
   max-width: 300px;
   box-sizing: border-box;
   text-align: center;
+  word-break: break-all;
 }
 
 button {
