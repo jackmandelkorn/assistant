@@ -60,6 +60,15 @@ button {
   cursor: pointer;
 }
 
+div.divider {
+  width: 300px;
+  background: #e2e8f0;
+  margin: 10px 0px;
+  height: 4px;
+  box-sizing: border-box;
+  border-radius: 100px;
+}
+
 *:not(body) {
   margin-bottom: 10px;
 }
