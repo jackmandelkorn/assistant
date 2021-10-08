@@ -23,6 +23,7 @@ textarea, input {
   border-radius: 8px;
   outline: none;
   width: 300px;
+  box-sizing: border-box;
 }
 
 textarea {
